@@ -1,4 +1,4 @@
-﻿using Rocket.Core.Plugins;
+using Rocket.Core.Plugins;
 using SDG.Unturned;
 using Steamworks;
 using System;
@@ -85,7 +85,11 @@ namespace DeathBox
 
             foreach (ItemJar itemJar in items)
             {
-                while (!storage.items.tryFindSpace(itemJar.size_x, itemJar.size_y, out byte x, out byte y, out byte rot))
+                byte x;
+                byte y;
+                byte rot;
+
+                while (!storage.items.tryFindSpace(itemJar.size_x, itemJar.size_y, out x, out y, out rot))
                 {
                     storage.items.resize(storage.items.width, (byte)(storage.items.height + 1));
                 }
@@ -200,7 +204,7 @@ namespace DeathBox
             return items;
         }
 
-        private void AddClothingIfEquipped(List<ItemJar> items, ushort itemId, byte quality, byte[] state, Action unequipAction)
+        private void AddClothingIfEquipped(List<ItemJar> items, ushort itemId, byte quality, byte[] state, System.Action unequipAction)
         {
             if (itemId == 0)
             {

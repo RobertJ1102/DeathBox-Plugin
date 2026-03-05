@@ -1,0 +1,2 @@
+C:\Users\rbj17\git\DeathBox-Plugin\Recycles\obj\Debug\Recycles.csproj.AssemblyReference.cache
+C:\Users\rbj17\git\DeathBox-Plugin\Recycles\obj\Debug\Recycles.csproj.CoreCompileInputs.cache
