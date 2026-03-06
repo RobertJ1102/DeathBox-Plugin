@@ -1,5 +1,6 @@
-﻿using Rocket.API;
+using Rocket.API;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace DeathBox
 {
@@ -12,6 +13,12 @@ namespace DeathBox
         public int NormalDisappearCooldown { get; set; }
         public bool PunchUtil { get; set; }
         public bool PunchUtil_DropWhenItemsDoesntFit { get; set; }
+
+        /// <summary>
+        /// Item IDs that are not put into the death box. XML format:
+        /// &lt;BlacklistedItemIds&gt;&lt;ushort&gt;363&lt;/ushort&gt;&lt;ushort&gt;364&lt;/ushort&gt;&lt;/BlacklistedItemIds&gt;
+        /// </summary>
+        [XmlArrayItem("ushort")]
         public List<ushort> BlacklistedItemIds { get; set; }
 
         public void LoadDefaults()
@@ -23,7 +30,7 @@ namespace DeathBox
             NormalDisappearCooldown = 10;
             PunchUtil = true;
             PunchUtil_DropWhenItemsDoesntFit = true;
-            BlacklistedItemIds = new List<ushort>();
+            BlacklistedItemIds = new List<ushort> { 1441 };
         }
     }
 }

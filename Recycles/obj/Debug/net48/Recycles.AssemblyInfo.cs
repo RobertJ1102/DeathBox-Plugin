@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RustDeathBox")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dcdacf1149ac6c4e5e5299c4dace02ff8856d29b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c7b6db1b8b934d57c24ab6ee6bff2808be0a2500")]
 [assembly: System.Reflection.AssemblyProductAttribute("RustDeathBox")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RustDeathBox")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
