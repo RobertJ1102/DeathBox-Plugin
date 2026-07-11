@@ -119,9 +119,15 @@ namespace DeathBox
                 }
             }
 
-            if (playerLife.player.equipment.itemID != 0)
+            // Vehicle turret guns are temporarily equipped (equipment.isTurret) and are not
+            // player-owned inventory — do not put them in the death box.
+            if (playerLife.player.equipment.itemID != 0 && !playerLife.player.equipment.isTurret)
             {
                 AddItemIfAllowed(items, new Item(playerLife.player.equipment.itemID, 1, playerLife.player.equipment.quality, playerLife.player.equipment.state));
+            }
+            else if (DebugMode && playerLife.player.equipment.isTurret)
+            {
+                Rocket.Core.Logging.Logger.Log($"Skipped vehicle turret equipment id {playerLife.player.equipment.itemID}");
             }
 
             AddClothingIfEquipped(
@@ -281,15 +287,38 @@ namespace DeathBox
 
         private void DamageBarricadeRequestHandler(CSteamID instigatorSteamID, Transform barricadeTransform, ref ushort pendingTotalDamage, ref bool shouldAllow, EDamageOrigin damageOrigin)
         {
-            if (damageOrigin != EDamageOrigin.Unknown && CooldownManager.ContainsKey(barricadeTransform))
+            try
             {
-                shouldAllow = Configuration.Instance.CanDamageDeathBox;
-            }
+                if (!CooldownManager.TryGetValue(barricadeTransform, out Coroutine cooldown))
+                {
+                    return;
+                }
 
-            if (shouldAllow && BarricadeManager.FindBarricadeByRootTransform(barricadeTransform).GetServersideData().barricade.health - pendingTotalDamage <= 0)
+                if (damageOrigin != EDamageOrigin.Unknown)
+                {
+                    shouldAllow = Configuration.Instance.CanDamageDeathBox;
+                }
+
+                if (!shouldAllow)
+                {
+                    return;
+                }
+
+                BarricadeDrop drop = BarricadeManager.FindBarricadeByRootTransform(barricadeTransform);
+                if (drop == null)
+                {
+                    return;
+                }
+
+                if (drop.GetServersideData().barricade.health - pendingTotalDamage <= 0)
+                {
+                    StopCoroutine(cooldown);
+                    CooldownManager.Remove(barricadeTransform);
+                }
+            }
+            catch (Exception ex)
             {
-                StopCoroutine(CooldownManager[barricadeTransform]);
-                CooldownManager.Remove(barricadeTransform);
+                Rocket.Core.Logging.Logger.LogException(ex, "DamageBarricadeRequestHandler failed; allowing default damage behavior");
             }
         }
 

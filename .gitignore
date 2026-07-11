@@ -1,0 +1,43 @@
+# Build outputs
+**/bin/
+**/obj/
+**/DLLs/
+**/out/
+**/publish/
+
+# NuGet
+**/packages/
+*.nupkg
+*.snupkg
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Visual Studio / Rider / VS Code
+.vs/
+.vscode/
+.idea/
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+*.rsuser
+*.DotSettings.user
+
+# OS junk
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Logs & temp
+*.log
+*.tmp
+*.temp
+*.cache
+
+# Local tooling / scratch (decompiled game sources, etc.)
+/tools/
+
+# Local lib copies of game/Rocket assemblies (resolve via HintPath / install)
+**/lib/
+!**/lib/.gitkeep
