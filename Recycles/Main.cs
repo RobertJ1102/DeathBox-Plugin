@@ -67,6 +67,17 @@ namespace DeathBox
 
         private void OnPlayerPreDeath(PlayerLife playerLife)
         {
+            // Leave inventory alone so vanilla death drop can scatter loot.
+            if (Configuration.Instance.SkipDeathBoxInVehicle && playerLife.player.movement.getVehicle() != null)
+            {
+                if (DebugMode)
+                {
+                    Rocket.Core.Logging.Logger.Log("Skipped death box: player died in a vehicle");
+                }
+
+                return;
+            }
+
             List<ItemJar> items = GetDeathBoxItems(playerLife);
             if (items.Count == 0)
             {
