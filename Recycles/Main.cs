@@ -78,6 +78,16 @@ namespace DeathBox
                 return;
             }
 
+            if (Configuration.Instance.SkipDeathBoxInSafezone && playerLife.player.movement.isSafe)
+            {
+                if (DebugMode)
+                {
+                    Rocket.Core.Logging.Logger.Log("Skipped death box: player died in a safezone");
+                }
+
+                return;
+            }
+
             List<ItemJar> items = GetDeathBoxItems(playerLife);
             if (items.Count == 0)
             {

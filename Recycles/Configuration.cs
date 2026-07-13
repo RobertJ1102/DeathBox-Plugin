@@ -20,6 +20,12 @@ namespace DeathBox
         public bool SkipDeathBoxInVehicle { get; set; } = true;
 
         /// <summary>
+        /// When true, dying in a safezone skips the death box so vanilla loot drop applies
+        /// (e.g. suicide menu in a safezone).
+        /// </summary>
+        public bool SkipDeathBoxInSafezone { get; set; } = true;
+
+        /// <summary>
         /// Item IDs that are not put into the death box. XML format:
         /// &lt;BlacklistedItemIds&gt;&lt;ushort&gt;363&lt;/ushort&gt;&lt;ushort&gt;364&lt;/ushort&gt;&lt;/BlacklistedItemIds&gt;
         /// </summary>
@@ -36,6 +42,7 @@ namespace DeathBox
             PunchUtil = true;
             PunchUtil_DropWhenItemsDoesntFit = true;
             SkipDeathBoxInVehicle = true;
+            SkipDeathBoxInSafezone = true;
             BlacklistedItemIds = new List<ushort> { 1441 };
         }
     }
