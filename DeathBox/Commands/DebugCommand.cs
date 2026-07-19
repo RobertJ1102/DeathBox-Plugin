@@ -1,4 +1,4 @@
-﻿using Rocket.API;
+using Rocket.API;
 using Rocket.Core.Logging;
 using System.Collections.Generic;
 
@@ -15,8 +15,8 @@ namespace DeathBox.Commands
 
         public void Execute(IRocketPlayer caller, string[] command)
         {
-            Main.DebugMode = !Main.DebugMode;
-            Logger.Log($"[DEBUG MODE] Debug state changed to {Main.DebugMode}.");
+            DeathBoxPlugin.DebugMode = !DeathBoxPlugin.DebugMode;
+            Logger.Log($"[DEBUG MODE] Debug state changed to {DeathBoxPlugin.DebugMode}.");
         }
     }
 }

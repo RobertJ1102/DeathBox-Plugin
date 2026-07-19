@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 
 namespace DeathBox
 {
-    public class Configuration : IRocketPluginConfiguration
+    public class DeathBoxConfig : IRocketPluginConfiguration
     {
         public byte InitialDeathBoxHSize { get; set; }
         public ushort DeathBoxID { get; set; }
@@ -30,7 +30,7 @@ namespace DeathBox
         /// &lt;BlacklistedItemIds&gt;&lt;ushort&gt;363&lt;/ushort&gt;&lt;ushort&gt;364&lt;/ushort&gt;&lt;/BlacklistedItemIds&gt;
         /// </summary>
         [XmlArrayItem("ushort")]
-        public List<ushort> BlacklistedItemIds { get; set; }
+        public List<ushort>? BlacklistedItemIds { get; set; } = new List<ushort>();
 
         public void LoadDefaults()
         {
